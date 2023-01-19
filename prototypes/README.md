@@ -1,5 +1,18 @@
 # Understanding Prototype Methods
 
+- [x] kitties and puppers
+- [x] breweries
+- [x] mods
+- [x] weather
+- [x] classrooms
+- [x] national parks
+- [ ] cakes
+- [x] books
+- [ ] clubs
+
+
+
+
 Understanding how to use prototype methods is an important step in learning how to work with application data. As you build more complex applications, you'll find yourself working with very large datasets. These datasets might need to be massaged into new formats or connect to other sources of data. Prototype methods will give you the tools to accomplish these tasks.
 
 In order to be successful when working with prototype methods, you'll need to have a solid understanding of the following concepts:
@@ -88,8 +101,8 @@ You will then check that your solution is correct by running the corresponding t
 If you'd like to keep track of your progress, feel free to use the checklist below. Change the `[ ]` to `[x]` in order to check off each item.
 
 #### Single Data Sets
-- [ ] kitties
-- [ ] puppers
+- [x] kitties
+- [x] puppers
 - [ ] club
 - [ ] mods
 - [ ] cakes

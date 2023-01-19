@@ -1,43 +1,52 @@
-const { kitties } = require('./datasets/kitties');
-const { puppers } = require('./datasets/puppers');
-const { mods } = require('./datasets/mods');
-const { cakes } = require('./datasets/cakes');
-const { classrooms } = require('./datasets/classrooms');
-const { breweries } = require('./datasets/breweries');
-const { nationalParks } = require('./datasets/nationalParks');
-const { weather } = require('./datasets/weather');
-const { instructors, cohorts } = require('./datasets/turing');
-const { bosses, sidekicks } = require('./datasets/bosses');
-const { constellations, stars } = require('./datasets/astronomy');
-const { weapons, characters } = require('./datasets/ultima');
-const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
-
+const { kitties } = require("./datasets/kitties");
+const { puppers } = require("./datasets/puppers");
+const { mods } = require("./datasets/mods");
+const { cakes } = require("./datasets/cakes");
+const { classrooms } = require("./datasets/classrooms");
+const { breweries } = require("./datasets/breweries");
+const { nationalParks } = require("./datasets/nationalParks");
+const { weather } = require("./datasets/weather");
+const { instructors, cohorts } = require("./datasets/turing");
+const { bosses, sidekicks } = require("./datasets/bosses");
+const { constellations, stars } = require("./datasets/astronomy");
+const { weapons, characters } = require("./datasets/ultima");
+const { dinosaurs, humans, movies } = require("./datasets/dinosaurs");
 
 // SINGLE DATASETS
 // =================================================================
 
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
-  orangePetNames() {
-    // Return an array of just the names of kitties who are orange e.g.
-        // ['Tiger', 'Snickers']
+  // Return an array of just the names of kitties who are orange e.g.
+  // ['Tiger', 'Snickers']
 
-        /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+  /* CODE GOES HERE */
+  orangePetNames(pets) {
+    const orangePets = pets.filter((pet) => {
+      return pet.color === "orange";
+    });
+    const orangePetNames = orangePets.map((pet) => {
+      return pet.name;
+    });
+    return orangePetNames;
   },
+  // Annotation:
+  // Write your annotation here as a comment
 
-  sortByAge() {
+  sortByAge(pets) {
     // Sort the kitties by their age
 
     /* CODE GOES HERE */
+    pets.sort((young, old) => {
+      return old.age - young.age;
+    });
+    return pets;
 
     // Annotation:
     // Write your annotation here as a comment
   },
 
-  growUp() {
+  growUp(pets) {
     // Return an array of kitties who have all grown up by 2 years e.g.
     // [{
     //   name: 'Felicia',
@@ -52,7 +61,12 @@ const kittyPrompts = {
     // ...etc]
 
     /* CODE GOES HERE */
-  }
+    futureAge = pets.map((pet) => {
+      pet.age += 2;
+      return pet;
+    });
+    return futureAge;
+  },
 };
 
 // PLEASE READ-----------------------
@@ -61,21 +75,15 @@ const kittyPrompts = {
 // they can perform the same utility
 // for the kitties or puppers datasets, depending on what arguments you send through.
 
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
-  membersBelongingToClubs() {
+  membersBelongingToClubs(clubs) {
     // Your function should access the clubs data through a parameter (it is being passed as an argument in the test file)
     // Create an object whose keys are the names of people, and whose values are
     // arrays that include the names of the clubs that person is a part of. e.g.
@@ -84,29 +92,53 @@ const clubPrompts = {
     //   Pam: ['Drama', 'Art', 'Chess'],
     //   ...etc
     // }
-
     /* CODE GOES HERE */
-
+    // let byName = clubs.reduce((key, obj) =>{
+    //   let name = obj['members']
+    //   key[name] = []
+    //   key[name].push(obj)
+    //   return key
+    // })
+    // console.log(111111, byName)
+    // data.reduce((acc, d) => {
+    //   if (Object.keys(acc).includes(d.group)) return acc;
+    //   acc[d.group] = data.filter((g) => g.group === d.group);
+    //   return acc;
+    // }, {});
+    // function viewSupplies() {
+    //   let craftKeys = Object.keys(craftSupplies);
+    //   return craftKeys.reduce((acc, key) => {
+    //     craftSupplies[key].forEach((item) => {
+    //       if (!acc[item.name]) acc[item.name] = [];
+    //       acc[item.name].push(key);
+    //     });
+    //     return acc;
+    //   }, {});
+    // }
+    // let allMembers = [];
+    // clubs.forEach((club) => allMembers.push(club.members));
+    // let flat = allMembers.flat();
+    // let set = [new Set(flat)]
+    // let set1 = set.forEach((person) => {
+    //   obj = {}
+    //   obj[person] = clubs.club
+    //   return obj
+    // })
+    // console.log(set1)
+    // clubs.reduce((acc, club) => {
+    //   if()
+    // }, {})
+    // set.forEach((person) => console.log(person))
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: mods from ./datasets/mods
 const modPrompts = {
@@ -118,30 +150,28 @@ const modPrompts = {
     //   { mod: 2, studentsPerInstructor: 11 },
     //   { mod: 3, studentsPerInstructor: 10 },
     //   { mod: 4, studentsPerInstructor: 8 }
-    // ]
+    //]
+
+    rearranged = mods.map((mod) => {
+      return {
+        ["mod"]: mod.mod,
+        ["studentsPerInstructor"]: mod.students / mod.instructors,
+      };
+    });
+    return rearranged;
 
     /* CODE GOES HERE */
 
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: cakes from ./datasets/cakes
 const cakePrompts = {
@@ -153,11 +183,16 @@ const cakePrompts = {
     //    { flavor: 'yellow', inStock: 14 },
     //    ..etc
     // ]
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
+    let rearranged = cakes.map((cake) => {
+      return {
+        flavor: cake.cakeFlavor,
+        inStock: cake.inStock,
+      };
+    });
+    return rearranged;
   },
 
   onlyInStock() {
@@ -180,32 +215,45 @@ const cakePrompts = {
     // },
     // ..etc
     // ]
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
+
+    let inStock = cakes.filter((cake) => {
+      if (cake.inStock > 0) {
+        return cake;
+      }
+    });
+    return inStock;
   },
 
   totalInventory() {
     // Return the total amount of cakes in stock e.g.
     // 59
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
+    let total = cakes.reduce((acc, cake) => {
+      return (acc += cake.inStock);
+    }, 0);
+    return total;
   },
 
   allToppings() {
     // Return an array of all unique toppings (no duplicates) needed to bake
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
+    let toppings = cakes.map((cake) => {
+      return cake.toppings;
+    });
+
+    let flattened = toppings.flat();
+    let toppingSet = [...new Set(flattened)];
+    console.log(toppingSet);
+    return toppingSet;
   },
 
   groceryList() {
@@ -218,29 +266,17 @@ const cakePrompts = {
     //    'berries': 2,
     //    ...etc
     // }
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: classrooms from ./datasets/classrooms
 const classPrompts = {
@@ -253,6 +289,10 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
+    let feClassrooms = classrooms.filter(
+      (classroom) => classroom.program === "FE"
+    );
+    return feClassrooms;
     /* CODE GOES HERE */
 
     // Annotation:
@@ -266,7 +306,41 @@ const classPrompts = {
     //   feCapacity: 110,
     //   beCapacity: 96
     // }
+    // let capacity = classrooms.reduce((acc, cur) => {
+    //   let beCap;
+    //   let feCap;
+    //    if(cur.program === 'FE') {
+    //     acc += cur.capacity;
+    //     feCap = acc
+    //   } else if (cur.program === 'BE') {
+    //     acc += cur.capacity
+    //     beCap = acc
+    //   }
+    //   console.log(feCap)
+    //   return feCap
+    // }, {
+    //   feCapacity: feCap,
+    //   beCapacity: beCap
+    // })
+    // console.log(capacity)
+    //return capacity
 
+    let feTotal = classrooms.reduce((acc, cur) => {
+      if (cur.program === "FE") {
+        acc += cur.capacity;
+      }
+      return acc;
+    }, 0);
+    let beTotal = classrooms.reduce((acc, cur) => {
+      if (cur.program === "BE") {
+        acc += cur.capacity;
+      }
+      return acc;
+    }, 0);
+    return {
+      feCapacity: feTotal,
+      beCapacity: beTotal,
+    };
     /* CODE GOES HERE */
 
     // Annotation:
@@ -275,12 +349,14 @@ const classPrompts = {
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
-  }
+    let sortedClass = classrooms.sort((a, b) => {
+      b.capacity - a.capacity;
+    });
+    return sortedClass;
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -292,39 +368,70 @@ const classPrompts = {
 // DATASET: books from './datasets/books
 
 const bookPrompts = {
-  removeViolence() {
+  removeViolence(books) {
     // Your function should access the books data through a parameter (it is being passed as an argument in the test file)
     // return an array of all book titles that are not horror or true crime. Eg:
-
     //  ['1984', 'The Great Gatsby', 'Lord of the Flies', 'Harry Potter and the Sorcerer\'s Stone',
     //   'The Hitchhiker\'s Guide to the Galaxy', 'Flowers for Algernon', 'Slaughterhouse-Five',
     //   'The Handmaid\'s Tale', 'The Metamorphosis', 'Brave New World', 'Life of Pi',
     //   'The Curious Incident of the Dog in the Night - Time', 'The Bell Jar',
     //   'Catch-22', 'Treasure Island']
-
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
+    // let filtered = []
+    // books.forEach((book) => {
+    //      if (book.genre !== "Horror") {
+    //        filtered.push(book);
+    //      }
+    //      //console.log(filtered)
+    // })
+    // filtered.forEach((book) => {
+    //   if(book.genre === "True Crime") {
+    //     filtered.splice(book, 1)
+    //   }
+    //   console.log(filtered.name);
+    // return filtered
+    // })
 
+    let reduced = books.reduce((acc, book) => {
+      if (book.genre !== "Horror" && book.genre !== "True Crime") {
+        acc.push(book.title);
+      }
+      return acc;
+    }, []);
+    return reduced;
   },
-  getNewBooks() {
+
+  getNewBooks(books) {
     // return an array of objects containing all books that were
     // published in the 90's and 00's. Inlucde the title and the year Eg:
-
     // [{ title: 'Harry Potter and the Sorcerer\'s Stone', year: 1997 },
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
-  }
-
+    //  let older = []
+    //   books.forEach((book) => {
+    //     if(book.published > 1990) {
+    //       older.push(book.title)
+    //     }
+    //   })
+    //   console.log(older);
+    //    return older;
+    let older = books.reduce((acc, book) => {
+      if (book.published > 1990) {
+        acc.push({
+          title: book.title,
+          year: book.published,
+        });
+      }
+      return acc;
+    }, []);
+    return older;
+  },
 };
-
 
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
@@ -339,6 +446,10 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
+    avgTemps = weather.map((data) => {
+      return (data.temperature["high"] + data.temperature["low"]) / 2;
+    });
+    return avgTemps;
     /* CODE GOES HERE */
 
     // Annotation:
@@ -347,18 +458,32 @@ const weatherPrompts = {
 
   findSunnySpots() {
     // Return an array of sentences of the locations that are sunny
-    // and mostly sunny. Include the location and weather type. Eg:
+    // and mostly sunny Include the location and weather type. Eg:
     // [ 'Atlanta, Georgia is sunny.',
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
     /* CODE GOES HERE */
+    let sentences = [];
+    weather.forEach((data) => {
+      if (data.type === "sunny") {
+        sentences.push(`${data.location} is ${data.type}.`);
+      } else if (data.type === "mostly sunny") {
+        sentences.push(`${data.location} is ${data.type}.`);
+      }
+    });
+    return sentences;
 
     // Annotation:
     // Write your annotation here as a comment
   },
 
   findHighestHumidity() {
+    let sorted = weather.sort((a, b) => {
+      return b.humidity - a.humidity;
+    });
+    return sorted[0];
+
     // Return the location with the highest humidity. Eg:
     // {
     //   location: 'Portland, Oregon',
@@ -371,8 +496,7 @@ const weatherPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
-
-  }
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -380,7 +504,6 @@ const weatherPrompts = {
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
 
 // DATASET: nationalParks from ./datasets/nationalParks
 
@@ -392,11 +515,22 @@ const nationalParksPrompts = {
     //   parksToVisit: ["Yellowstone", "Glacier", "Everglades"],
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
+    let haveBeen = [];
+    let wantTo = [];
+    nationalParks.forEach((park) => {
+      if (park.visited === true) {
+        haveBeen.push(park.name);
+      } else if (park.visited === false) {
+        wantTo.push(park.name);
+      }
+    });
+    return {
+      parksToVisit: wantTo,
+      parksVisited: haveBeen,
+    };
   },
 
   getParkInEachState() {
@@ -408,8 +542,23 @@ const nationalParksPrompts = {
     // { Utah: 'Zion' },
     // { Florida: 'Everglades' } ]
 
-
     /* CODE GOES HERE */
+    let flipped = nationalParks.reduce((current, park) => {
+      let flippedObj = {};
+      flippedObj[park.location] = park.name;
+      current.push(flippedObj);
+      return current;
+    }, []);
+    return flipped;
+    //current.push({ [park.location]: park.name });
+
+    // console.log(flipped)
+    // return flipped
+    // newobj = [
+    // ]
+    // nationalParks.forEach((park) => {
+    //   newobj.push({park[location]: park.name})
+    // })
 
     // Annotation:
     // Write your annotation here as a comment
@@ -430,40 +579,52 @@ const nationalParksPrompts = {
     //   'canyoneering',
     //   'backpacking',
     //   'rock climbing' ]
-
     /* CODE GOES HERE */
 
-    // Annotation:
-    // Write your annotation here as a comment
-  }
-};
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
-// DATASET: breweries from ./datasets/breweries
-const breweryPrompts = {
-  getBeerCount() {
-    // Return the total beer count of all beers for every brewery e.g.
-    // 40
-
-    /* CODE GOES HERE */
+    let activities = nationalParks.map((park) => {
+      return park.activities;
+    });
+    let flatActivities = activities.flat();
+    let activitySet = [...new Set(flatActivities)];
+    return activitySet;
 
     // Annotation:
     // Write your annotation here as a comment
   },
+};
+
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+
+// DATASET: breweries from ./datasets/breweries
+const breweryPrompts = {
+  getBeerCount() {
+    beerCounts = [];
+    breweries.forEach((brewery) => {
+      beerCounts.push(brewery.beers.length);
+    });
+    totalCount = beerCounts.reduce((acc, beer) => {
+      return acc + beer;
+    }, 0);
+    return totalCount;
+  },
+  //  const beers = breweries.reduce((beer, total) => {
+  //       beer += total.beers.length
+  //       return beer
+  //     }, 0)
+  //     return beers
 
   getBreweryBeerCount() {
+    let breweryCount = breweries.map((brewery) => {
+      return {
+        name: brewery.name,
+        beerCount: brewery.beers.length,
+      };
+    });
+    return breweryCount;
     // Return an array of objects where each object has the name of a brewery
     // and the count of the beers that brewery has e.g.
     // [
@@ -482,40 +643,27 @@ const breweryPrompts = {
     // Return the beer which has the highest ABV of all beers
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
-
-    /* CODE GOES HERE */
+    let beers = [];
+    breweries.forEach((brewery) => beers.push(brewery.beers));
+    let flattened = beers.flat().sort((a, b) => b.abv - a.abv);
+    return flattened[0];
 
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DOUBLE DATASETS
 // =================================================================
@@ -529,9 +677,21 @@ const turingPrompts = {
     //  { name: 'Pam', studentCount: 21 },
     //  { name: 'Robbie', studentCount: 18 }
     // ]
-
     /* CODE GOES HERE */
 
+    const newSet = instructors.reduce((acc, cur) => {
+      cohorts.forEach((cohort) => {
+        cur.module === cohort.module &&
+          acc.push({
+            name: cur.name,
+            studentCount: cohort.studentCount,
+          });
+      });
+
+      return acc;
+    }, []);
+
+    return newSet;
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -542,8 +702,17 @@ const turingPrompts = {
     // cohort1806: 9,
     // cohort1804: 10.5
     // }
-
     /* CODE GOES HERE */
+
+    const perInstructor = cohorts.reduce((acc, cur) => {
+      let instructorCount = 0;
+      instructors.forEach((i) => cur.module === i.module && instructorCount++);
+      acc[`cohort${cur.cohort}`] = cur.studentCount / instructorCount;
+
+      return acc;
+    }, {});
+
+    return perInstructor;
 
     // Annotation:
     // Write your annotation here as a comment
@@ -563,9 +732,19 @@ const turingPrompts = {
     //     Christie: [1, 2, 3, 4],
     //     Will: [1, 2, 3, 4]
     //   }
-
     /* CODE GOES HERE */
 
+    const modsPerTeacher = instructors.reduce((acc, cur) => {
+      cur.teaches.forEach((skill) => {
+        if (cohorts.forEach.curriculm.includes(skill)) {
+          console.log(true);
+        }
+      });
+
+      return acc;
+    });
+
+    return modsPerTeacher;
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -579,29 +758,17 @@ const turingPrompts = {
     //   javascript: [ 'Travis', 'Louisa', 'Christie', 'Will' ],
     //   recursion: [ 'Pam', 'Leta' ]
     // }
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
@@ -613,29 +780,17 @@ const bossPrompts = {
     //   { bossName: 'Ursula', sidekickLoyalty: 20 },
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
     // ]
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: constellations, stars } from ./datasets/astronomy
 const astronomyPrompts = {
@@ -654,11 +809,21 @@ const astronomyPrompts = {
     //     lightYearsFromEarth: 640,
     //     color: 'red' }
     // ]
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
+    //     let constKeys = Object.keys(constellations);
+    //     [ 'orion', 'ursaMajor', 'ursaMinor' ]
+    //     console.log(constKeys);
+    // let starKeys = Object.keys(stars);
+    // stars.filter((star) => {
+    //   let constKeys = Object.keys(constellations)
+    //   constKeys.forEach(constellation => {
+    //     constellations[constellation].orangePetNames
+    //     return
+    //   })
+    // })
+    // })
   },
 
   starsByColor() {
@@ -671,9 +836,7 @@ const astronomyPrompts = {
     //   orange: [{obj}],
     //   red: [{obj}]
     // }
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -681,7 +844,6 @@ const astronomyPrompts = {
   constellationsStarsExistIn() {
     // Return an array of the names of the constellations that the brightest stars are part of e.g.
     // Brightest Stars are indicated by visualMagnitude - the lower the number, the brighter the star
-
     //  [ "Canis Major",
     //    "Carina",
     //    "Boötes",
@@ -692,71 +854,42 @@ const astronomyPrompts = {
     //    "The Plow",
     //    "Orion",
     //    "The Little Dipper" ]
-
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: charaters, weapons from ./datasets/ultima
 const ultimaPrompts = {
   totalDamage() {
-
     // Return the sum of the amount of damage for all the weapons that our characters can use
     // Answer => 113
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
   },
 
   charactersByTotal() {
-
     // Return the sum damage and total range for each character as an object.
     // ex: [ { Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
   },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: dinosaurs, humans, movies from ./datasets/dinosaurs
 const dinosaurPrompts = {
@@ -770,9 +903,7 @@ const dinosaurPrompts = {
     //   'Jurassic World': 11,
     //   'Jurassic World: Fallen Kingdom': 18
     // }
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -802,9 +933,7 @@ const dinosaurPrompts = {
           }
       }
     */
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -834,9 +963,7 @@ const dinosaurPrompts = {
         imdbStarMeterRating: 0
       }]
     */
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -856,12 +983,10 @@ const dinosaurPrompts = {
       { name: 'Chris Pratt', ages: [ 36, 39 ] },
       { name: 'Bryce Dallas Howard', ages: [ 34, 37 ] } ]
     */
-
     /* CODE GOES HERE */
-
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
 module.exports = {
@@ -878,5 +1003,5 @@ module.exports = {
   nationalParksPrompts,
   weatherPrompts,
   bookPrompts,
-  dinosaurPrompts
+  dinosaurPrompts,
 };
